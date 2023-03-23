@@ -1,0 +1,7 @@
+---
+- name: Install Jellyfin
+  hosts: "{{ target | default('jellyfin') }}"
+  roles:
+    - diademiemi.jellyfin.install
+
+...

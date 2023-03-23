@@ -1,0 +1,7 @@
+---
+- name: Install Intel Arc drivers for Jellyfin
+  hosts: "{{ target | default('jellyfin') }}"
+  roles:
+    - diademiemi.jellyfin.intel_arc
+
+...

@@ -1,0 +1,71 @@
+---
+jellyfin_intel_arc_opencl_icd_package_version: "23.05.25593.11"
+
+jellyfin_intel_arc_opencl_igd_package_version: "1.0.13230.7"
+
+jellyfin_intel_arc_opencl_igdgmm_package_version: "22.3.0"
+
+jellyfin_intel_arc_debs:
+  - "https://github.com/intel/intel-graphics-compiler/releases/download/igc-{{ jellyfin_intel_arc_opencl_igd_package_version }}/\
+      intel-igc-core_{{ jellyfin_intel_arc_opencl_igd_package_version }}_amd64.deb"
+  - "https://github.com/intel/intel-graphics-compiler/releases/download/igc-{{ jellyfin_intel_arc_opencl_igd_package_version }}/\
+      intel-igc-opencl_{{ jellyfin_intel_arc_opencl_igd_package_version }}_amd64.deb"
+  - "https://github.com/intel/compute-runtime/releases/download/{{ jellyfin_intel_arc_opencl_icd_package_version }}/\
+    libigdgmm12_{{ jellyfin_intel_arc_opencl_igdgmm_package_version }}_amd64.deb"
+  - "https://github.com/intel/compute-runtime/releases/download/{{ jellyfin_intel_arc_opencl_icd_package_version }}/\
+      intel-opencl-icd_{{ jellyfin_intel_arc_opencl_icd_package_version }}_amd64.deb"
+
+jellyfin_intel_arc_firmware_packages:
+  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-misc-nonfree_20230210-4_all.deb"
+  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-amd-graphics_20230210-4_all.deb"
+  - "http://ftp.us.debian.org/debian/pool/main/f/firmware-free/firmware-linux-free_20200122-1_all.deb"
+  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux-nonfree_20230210-4_all.deb"
+  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux_20230210-4_all.deb"
+
+jellyfin_intel_arc_firmware_bins:
+  - "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/i915/dg2_huc_gsc.bin"
+
+jellyfin_intel_arc_compile_kernel: true
+jellyfin_intel_arc_kernel_major_version: '6'
+jellyfin_intel_arc_kernel_version: '6.2.7'
+# jellyfin_intel_arc_kernel_version: '6.1.21'
+
+jellyfin_intel_arc_kernel_tar: "https://cdn.kernel.org/pub/linux/kernel/v{{ jellyfin_intel_arc_kernel_major_version }}.x/\
+  linux-{{ jellyfin_intel_arc_kernel_version }}.tar.xz"
+
+jellyfin_intel_arc_kernel_release: "{{ jellyfin_intel_arc_kernel_tar | basename | regex_replace('.tar.xz', '') }}"
+
+jellyfin_intel_arc_kernel_config: "/boot/config-{{ ansible_kernel }}"
+
+jellyfin_intel_arc_kernel_build_deps:
+  - libncurses-dev
+  - flex
+  - gawk
+  - bison
+  - openssl
+  - libssl-dev
+  - dkms
+  - libelf-dev
+  - libudev-dev
+  - libpci-dev
+  - libiberty-dev
+  - autoconf
+  - llvm
+  - bc
+  - rsync
+
+jellyfin_intel_arc_kernel_config_values:
+  - name: "CONFIG_INTEL_MEI_GSC"
+    value: "m"
+  - name: "CONFIG_INTEL_MEI_PXP"
+    value: "m"
+
+jellyfin_intel_arc_kernel_built_debs:
+  - "/tmp/linux-image-{{ jellyfin_intel_arc_kernel_version }}_\
+      {{ jellyfin_intel_arc_kernel_version }}-{{ jellyfin_intel_arc_kernel_version['content'] | b64decode | default('1') }}_amd64.deb"
+  - "/tmp/linux-headers-{{ jellyfin_intel_arc_kernel_version }}_\
+      {{ jellyfin_intel_arc_kernel_version }}-{{ jellyfin_intel_arc_kernel_version['content'] | b64decode | default('1') }}_amd64.deb"
+  - "/tmp/linux-libc-dev_{{ jellyfin_intel_arc_kernel_version }}-\
+      {{ jellyfin_intel_arc_kernel_version['content'] | b64decode | default('1') }}_amd64.deb"
+
+...
