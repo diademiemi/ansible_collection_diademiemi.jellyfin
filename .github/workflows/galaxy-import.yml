@@ -26,5 +26,6 @@ jobs:
 
       - name: Trigger a new import on Galaxy.
         run: >-
-          ansible-galaxy collection publish --api-key ${{ secrets.GALAXY_API_KEY }}
-          $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)
+          ansible-galaxy collection build
+          ansible-galaxy collection publish --api-key ${{ secrets.GALAXY_API_KEY }} $(ls -t *.tar.gz | head -n 1)
+
