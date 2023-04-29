@@ -59,6 +59,8 @@ jellyfin_intel_arc_kernel_config_values:
     value: "m"
   - name: "CONFIG_INTEL_MEI_PXP"
     value: "m"
+  - name: "SYSTEM_TRUSTED_KEYS"
+    value: '""'
 
 jellyfin_intel_arc_kernel_built_debs:
   - "/tmp/linux-image-{{ jellyfin_intel_arc_kernel_version }}_\
