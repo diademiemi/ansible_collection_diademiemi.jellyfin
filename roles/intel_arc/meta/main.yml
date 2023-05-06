@@ -1,6 +1,9 @@
 galaxy_info:
   author: diademiemi
-  description: Set up Intel Arc drivers for Jellyfin on Debian 10 (Buster) and Debian 11 (Bullseye)
+  namespace: diademiemi
+  company: diademiemi
+  description: Ansible role to install and configure intel_arc
+  role_name: intel_arc
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -15,7 +18,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: MIT
 
-  min_ansible_version: "2.1"
+  min_ansible_version: "2.10"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -25,18 +28,11 @@ galaxy_info:
   # If you don't wish to enumerate all versions for a particular platform, use 'all'.
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
-  #
+
   platforms:
     - name: Debian
       versions:
-        - 'buster'
-        - 'bullseye'
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+        - bullseye
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

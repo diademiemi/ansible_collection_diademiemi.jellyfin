@@ -1,0 +1,97 @@
+---
+- name: Install IGD
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ item }}"
+    state: present
+    update_cache: true
+  loop: "{{ jellyfin_intel_arc_debs }}"
+
+- name: Enable non-free repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb http://deb.debian.org/debian/ buster main contrib non-free
+    state: present
+
+- name: Download firmware packages
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ item }}"
+    state: present
+  loop: "{{ jellyfin_intel_arc_firmware_packages }}"
+
+- name: Compile Linux 6.2
+  when: jellyfin_intel_arc_compile_kernel
+  block:
+    - name: Install kernel build dependencies
+      become: true
+      ansible.builtin.apt:
+        name: "{{ jellyfin_intel_arc_kernel_build_deps }}"
+        state: present
+        update_cache: true
+
+    - name: Download kernel source
+      become: true
+      ansible.builtin.get_url:
+        url: "{{ jellyfin_intel_arc_kernel_tar }}"
+        dest: "/tmp/{{ jellyfin_intel_arc_kernel_tar | basename }}"
+        mode: '0644'
+
+    - name: Extract kernel source
+      become: true
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ jellyfin_intel_arc_kernel_tar | basename }}"
+        dest: "/tmp/"
+        remote_src: true
+
+    - name: Copy kernel config
+      become: true
+      ansible.builtin.copy:
+        src: "{{ jellyfin_intel_arc_kernel_config }}"
+        dest: "/tmp/{{ jellyfin_intel_arc_kernel_release }}/.config"
+        mode: '0644'
+        remote_src: true
+
+    - name: Set .config values
+      become: true
+      ansible.builtin.lineinfile:
+        path: "/tmp/{{ jellyfin_intel_arc_kernel_release }}/.config"
+        regexp: "$.*{{ item.name }}.*^"
+        line: "{{ item.name }}={{ item.value }}"
+        state: present
+      loop: "{{ jellyfin_intel_arc_kernel_config_values }}"
+
+    - name: Make kernel
+      become: true
+      ansible.builtin.shell: |
+        make olddefconfig
+        make -j$(nproc) deb-pkg
+      args:
+        chdir: "/tmp/{{ jellyfin_intel_arc_kernel_release }}/"
+        creates: "/tmp/linux-image-{{ jellyfin_intel_arc_kernel_version }}_\
+        {{ jellyfin_intel_arc_kernel_version }}-{{ kernel_version | default('1') }}_amd64.deb"
+
+    - name: Read kernel version
+      become: true
+      ansible.builtin.slurp:
+        src: "/tmp/{{ jellyfin_intel_arc_kernel_release }}/.version"
+      failed_when: false
+      register: jellyfin_intel_arc_kernel_version
+
+    - name: Install kernel
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+        state: present
+        update_cache: true
+      loop: "{{ jellyfin_intel_arc_kernel_built_debs }}"
+
+    - name: Download firmware binaries
+      become: true
+      ansible.builtin.get_url:
+        url: "{{ item }}"
+        dest: "/lib/firmware/i915/{{ item | basename }}"
+        mode: '0644'
+      loop: "{{ jellyfin_intel_arc_firmware_bins }}"
+
+...

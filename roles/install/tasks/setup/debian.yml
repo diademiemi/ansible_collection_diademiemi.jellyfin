@@ -1,0 +1,31 @@
+---
+- name: Import Jellyfin GPG key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://repo.jellyfin.org/debian/jellyfin_team.gpg.key
+    state: present
+
+- name: Add Jellyfin repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb https://repo.jellyfin.org/debian {{ ansible_distribution_release }} main
+    state: present
+
+- name: Install Jellyfin
+  become: true
+  ansible.builtin.apt:
+    name:
+      - jellyfin
+      - jellyfin-ffmpeg5
+    state: present
+
+- name: Add Jellyfin user to video and render group
+  become: true
+  ansible.builtin.user:
+    name: jellyfin
+    groups:
+      - video
+      - render
+    append: true
+
+...

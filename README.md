@@ -1,6 +1,6 @@
 # Ansible Collection - diademiemi.jellyfin
 
-Documentation for the collection. This collection is mainly focused at installing Jellyfin on Debian 11 with Intel Arc hardware encoding support.  
+This collection is mainly focused at installing Jellyfin on Debian 11 with Intel Arc hardware encoding support.  
 
 I may add support for other distros and hardware in the future if it is requested.  
 

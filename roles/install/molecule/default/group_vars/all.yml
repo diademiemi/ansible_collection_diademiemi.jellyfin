@@ -1,0 +1,5 @@
+---
+# This can't be tested in CI
+jellyfin_intel_arc_compile_kernel: false
+
+...
