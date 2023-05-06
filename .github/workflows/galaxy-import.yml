@@ -31,23 +31,23 @@ jobs:
           tag: '${{ env.collection_version }}'
 
       - name: Set up Python 3.
-        if: "${{ steps.check-tag.outputs.exists }}"
+        if: "${{ steps.check-tag.outputs.exists == 'false' }}"
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install Ansible.
-        if: "${{ steps.check-tag.outputs.exists }}"
+        if: "${{ steps.check-tag.outputs.exists == 'false' }}"
         run: pip3 install ansible-core
 
       - name: Trigger a new import on Galaxy.
-        if: "${{ steps.check-tag.outputs.exists }}"
+        if: "${{ steps.check-tag.outputs.exists == 'false' }}"
         run: >-
           ansible-galaxy collection build &&
           ansible-galaxy collection publish --api-key ${{ secrets.GALAXY_API_KEY }} $(ls -t *.tar.gz | head -n 1)
 
       - name: Add tag.
-        if: "${{ steps.check-tag.outputs.exists }}"
+        if: "${{ steps.check-tag.outputs.exists == 'false' }}"
         uses: anothrNick/github-tag-action@1.61.0 # Don't use @master unless you're happy to test the latest version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
