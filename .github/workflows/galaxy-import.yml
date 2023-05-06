@@ -26,28 +26,28 @@ jobs:
 
       - name: Check if tag already exists
         uses: mukunku/tag-exists-action@v1.2.0
-        id: checkTag
+        id: check-tag
         with: 
           tag: '${{ env.collection_version }}'
 
       - name: Set up Python 3.
-        if: "checkTag.exists"
+        if: "${{ steps.check-tag.outputs.exists }}"
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install Ansible.
-        if: "checkTag.exists"
+        if: "${{ steps.check-tag.outputs.exists }}"
         run: pip3 install ansible-core
 
       - name: Trigger a new import on Galaxy.
-        if: "checkTag.exists"
+        if: "${{ steps.check-tag.outputs.exists }}"
         run: >-
           ansible-galaxy collection build &&
           ansible-galaxy collection publish --api-key ${{ secrets.GALAXY_API_KEY }} $(ls -t *.tar.gz | head -n 1)
 
       - name: Add tag.
-        if: "checkTag.exists"
+        if: "${{ steps.check-tag.outputs.exists }}"
         uses: anothrNick/github-tag-action@1.61.0 # Don't use @master unless you're happy to test the latest version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
