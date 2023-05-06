@@ -11,6 +11,8 @@ name: Import to Galaxy
       - "galaxy.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
 
 jobs:
   galaxy-import:
