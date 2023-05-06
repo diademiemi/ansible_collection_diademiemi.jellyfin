@@ -27,11 +27,11 @@
 
 - name: Ensure video and render group exist
   ansible.builtin.group:
-    name:
-      - video
-      - render
+    name: "{{ item }}"
     state: present
-
+  loop:
+    - video
+    - render
 - name: Add Jellyfin user to video and render group
   become: true
   ansible.builtin.user:
