@@ -11,8 +11,7 @@
     find_vars:
       files: "{{ __role_task_search_order }}"
       skip: true
-      paths:
-        - "vars"
+      paths: ["{{ role_path }}/vars"]
 
 # Assert variables are set correctly for this platform
 - name: "Main | Assert platform/version specific variables"
@@ -21,8 +20,7 @@
     find_asserts:
       files: "{{ __role_task_search_order }}"
       skip: true
-      paths:
-        - "assert"
+      paths: ["{{ role_path }}/assert"]
 
 # Run tasks specific to this platform
 - name: "Main | platform/version specific playbooks"
@@ -31,7 +29,7 @@
     __role_find_tasks:
       files: "{{ __role_task_search_order }}"
       skip: true
-      paths: ["tasks/{{ __role_action_task }}"]
+      paths: ["{{ role_path }}/tasks/{{ __role_action_task }}"]
     __role_found_tasks: "{{ lookup('ansible.builtin.first_found', __role_find_tasks) }}"
   when: __role_found_tasks | length > 0
   loop: "{{ [__role_action | default('setup')] | flatten }}"
@@ -45,7 +43,7 @@
     __role_find_tasks:
       files: ["always.yml"]
       skip: true
-      paths: ["tasks/{{ __role_action_task }}"]
+      paths: ["{{ role_path }}/tasks/{{ __role_action_task }}"]
     __role_found_tasks: "{{ lookup('ansible.builtin.first_found', __role_find_tasks) }}"
   when: __role_found_tasks | length > 0
   loop: "{{ [__role_action | default('setup')] | flatten }}"
