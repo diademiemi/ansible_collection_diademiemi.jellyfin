@@ -16,11 +16,16 @@ jellyfin_intel_arc_debs:
       intel-opencl-icd_{{ jellyfin_intel_arc_opencl_icd_package_version }}_amd64.deb"
 
 jellyfin_intel_arc_firmware_packages:
-  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-misc-nonfree_20230210-4_all.deb"
-  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-amd-graphics_20230210-4_all.deb"
-  - "http://ftp.us.debian.org/debian/pool/main/f/firmware-free/firmware-linux-free_20200122-1_all.deb"
-  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux-nonfree_20230210-4_all.deb"
-  - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux_20230210-4_all.deb"
+  # - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-misc-nonfree_20230210-4_all.deb"
+  # - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-amd-graphics_20230210-4_all.deb"
+  # - "http://ftp.us.debian.org/debian/pool/main/f/firmware-free/firmware-linux-free_20200122-1_all.deb"
+  # - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux-nonfree_20230210-4_all.deb"
+  # - "http://ftp.us.debian.org/debian/pool/non-free-firmware/f/firmware-nonfree/firmware-linux_20230210-4_all.deb"
+  - "firmware-misc-nonfree"
+  - "firmware-amd-graphics"
+  - "firmware-linux-free"
+  - "firmware-linux-nonfree"
+  - "firmware-linux"
 
 jellyfin_intel_arc_firmware_bins:
   - "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/i915/dg2_huc_gsc.bin"

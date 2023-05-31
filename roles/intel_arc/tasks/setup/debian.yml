@@ -16,9 +16,9 @@
 - name: Download firmware packages
   become: true
   ansible.builtin.apt:
-    deb: "{{ item }}"
+    name: "{{ jellyfin_intel_arc_firmware_packages }}"
     state: present
-  loop: "{{ jellyfin_intel_arc_firmware_packages }}"
+  # loop: "{{ jellyfin_intel_arc_firmware_packages }}"
 
 - name: Compile Linux 6.2
   when: jellyfin_intel_arc_compile_kernel
