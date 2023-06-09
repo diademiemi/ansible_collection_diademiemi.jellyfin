@@ -42,10 +42,10 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use install role
+- name: Use diademiemi.jellyfin.install role
   hosts: "{{ target | default('install') }}"
   roles:
-    - diademiemi.install
+    - diademiemi.jellyfin.install
 ```
 
 License

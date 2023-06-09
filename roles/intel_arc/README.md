@@ -42,10 +42,10 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use intel_arc role
+- name: Use diademiemi.jellyfin.intel_arc role
   hosts: "{{ target | default('intel_arc') }}"
   roles:
-    - diademiemi.intel_arc
+    - diademiemi.jellyfin.intel_arc
 ```
 
 License
