@@ -7,7 +7,7 @@ This collection is mainly focused at installing Jellyfin on Debian 11 with Intel
 
 I may add support for other distros and hardware in the future if it is requested.  
 
-Contents 
+Contents
 ========
 
 Roles

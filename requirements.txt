@@ -1,5 +1,5 @@
 yamllint
-ansible-lint
+ansible-lint==6.16.2
 ansible
 ansible-compat==3.0.2  # ansible-community/molecule/issues/3903
 antsibull-changelog

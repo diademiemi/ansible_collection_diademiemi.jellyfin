@@ -1,0 +1,10 @@
+---
+skip_list:
+  - "var-naming[no-role-prefix]"
+
+# Exclude downloaded roles and collections from linting
+exclude_paths:
+  - collections/**
+  - roles/**
+
+...
