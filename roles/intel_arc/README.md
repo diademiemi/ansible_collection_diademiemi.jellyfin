@@ -10,13 +10,8 @@ Include more information about intel_arc in this section.
 Requirements
 ------------
 These platforms are supported:
-- Ubuntu 20.04  
-- Ubuntu 22.04  
 - Debian 10  
 - Debian 11  
-- EL 8 (Tested on Rocky Linux 8)  
-- EL 9 (Tested on Rocky Linux 9)  
-- Fedora 38  
 
 <!--
 - List hardware requirements here  
