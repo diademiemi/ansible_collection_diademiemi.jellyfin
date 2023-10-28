@@ -1,8 +1,6 @@
 Ansible Collection - diademiemi.jellyfin
 ========================================
 
-[![Molecule Test](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/molecule.yml)
-
 This collection is mainly focused at installing Jellyfin on Debian 11 with Intel Arc hardware encoding support.  
 
 I may add support for other distros and hardware in the future if it is requested.  
@@ -12,10 +10,10 @@ Contents
 
 Roles
 ------
-Role | Description
---- | ---
-[diademiemi.jellyfin.install](./roles/install/) | Install Jellyfin
-[diademiemi.jellyfin.intel_arc](./roles/intel_arc/) | Install necessary Intel Arc drivers for hardware encoding on Debian 11
+Role | Description | CI Status
+--- | --- | ---
+[diademiemi.jellyfin.install](./roles/install/) | Install Jellyfin | [![Molecule test](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-install.yml/badge.svg)](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-install.yml)
+[diademiemi.jellyfin.intel_arc](./roles/intel_arc/) | Install necessary Intel Arc drivers for hardware encoding on Debian 11 | [![Molecule test](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-intel_arc.yml/badge.svg)](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-intel_arc.yml)
 
 Click on the role to see the README for that role.  
 
