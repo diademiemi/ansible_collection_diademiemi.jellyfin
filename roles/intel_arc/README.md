@@ -1,7 +1,7 @@
 Ansible Role Template
 =========
 
-[![Molecule Test](https://github.com/diademiemi/ansible_role_intel_arc/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_intel_arc/actions/workflows/molecule.yml)
+[![Molecule test](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-intel_arc.yml/badge.svg)](https://github.com/diademiemi/ansible_collection_diademiemi.jellyfin/actions/workflows/ansible-role-intel_arc.yml)
 
 This is an Ansible role to install and configure intel_arc.
 
