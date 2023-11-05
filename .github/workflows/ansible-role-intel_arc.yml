@@ -9,7 +9,7 @@ name: Molecule Tests intel_arc
     branches:
       - main
     paths:
-      - "roles/intel_arc"
+      - "roles/intel_arc/**"
   workflow_dispatch:
 
 jobs:
