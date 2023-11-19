@@ -24,6 +24,6 @@
       failed_when: false
 
   tasks:
-    - name: "Include diademiemi.install"
+    - name: "Include diademiemi.jellyfin.install"
       ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
