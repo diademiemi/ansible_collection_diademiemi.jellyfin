@@ -10,7 +10,6 @@ Include more information about intel_arc in this section.
 Requirements
 ------------
 These platforms are supported:
-- Debian 10  
 - Debian 11  
 
 <!--
