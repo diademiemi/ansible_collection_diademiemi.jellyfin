@@ -13,14 +13,15 @@
 
 - name: Add Jellyfin repository
   become: true
-  ansible.builtin.file:
-    path: /etc/apt/sources.list.d/jellyfin.sources
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/jellyfin.sources
     content: |
       Types: deb
       URIs: https://repo.jellyfin.org/{{ ansible_distribution | lower }}
       Suites: {{ ansible_distribution_release }}
       Components: main
       Architectures: {{ jellyfin_install_arch_mapping[ansible_architecture] }}
+    mode: '0644'
 
 
 - name: Install Jellyfin
